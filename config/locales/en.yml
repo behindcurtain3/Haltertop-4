@@ -1,0 +1,12 @@
+en:
+  activerecord:
+    attributes:
+      user:
+        name: "Display Name"
+  brand: "Social Chess"
+  nav:
+    home: "HOME"
+    login: "LOGIN"
+    logout: "LOGOUT"
+    sign_up: "SIGN UP"
+    

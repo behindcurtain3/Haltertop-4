@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= t :brand %><% if content_for? :title %>: <%= yield :title %><% end %></title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <link href='https://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
+  <meta name="viewport" content="initial-scale=1">
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-static-top navbar-no-curves clear-bottom" role="navigation">
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-primary"> 
+			<span class="sr-only">Menu</span>
+			<span class="fa fa-bars"></span>
+		</button> 
+		<%= link_to root_path, :class => "navbar-brand" do %><%= image_tag 'brand.png', height: '18' %><% end %>
+	</div>
+	<div class="navbar-collapse collapse navbar-inverse-collapse" id="navbar-primary">
+	  <ul class="nav navbar-nav">
+  		<li><%= link_to t('nav.home'), root_path %></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+			<% if user_signed_in? %>
+				<li><%= link_to user_path(current_user) do %><span class="fa fa-user"></span>&nbsp; <%= current_user.name %><% end %></li>
+				<li><%= link_to destroy_user_session_path, method: :delete, :title => t('nav.logout') do %><span class="fa fa-sign-out"></span><% end %></li>
+			<% else %>
+			  <li><%= link_to t('nav.sign_up'), new_user_registration_path %></li>
+			  <li><%= link_to new_user_session_path do %><%= t('nav.login') %> <i class="fa fa-sign-in"></i><% end %></li>
+			<% end %>
+		</ul>
+	</div>
+</div>
+<div class="container-fluid content">
+		<div class="col-md-12 column">
+			<%= yield %>
+		</div>
+</div>
+</body>
+</html>
